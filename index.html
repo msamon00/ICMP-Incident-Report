@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNS / ICMP Incident Report</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Incident Report: DNS / ICMP Network Analysis</h1>
+
+        <div class="section">
+            <h2>Part 1: Problem Summary</h2>
+            <p>
+                Analysis of the tcpdump logs indicates a failure when accessing port 
+                <span class="mono">53</span> (DNS). ICMP echo replies returned the message 
+                <span class="mono">"udp port 53 unreachable"</span>, indicating that the DNS server was unreachable. 
+                This may be caused by firewall restrictions, service downtime, or misconfiguration, resulting in failed domain name resolution for end users.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>Part 2: Analysis and Cause</h2>
+            <p>
+                The issue was initially reported by users receiving a 
+                <span class="mono">"destination port unreachable"</span> message. 
+                The security team executed tcpdump multiple times, consistently observing the same ICMP error responses. 
+                These results indicate DNS communication failures that prevent successful domain resolution, rendering the website inaccessible to users.
+            </p>
+
+            <p>
+                <strong>Recommended next steps:</strong> Verify the availability of the DNS server, review firewall rules affecting UDP port 
+                <span class="mono">53</span>, and contact the vendor to determine whether a service outage or potential DoS attack is occurring.
+            </p>
+        </div>
+
+        <div class="section">
+            <h3>Evidence</h3>
+            <img src="tcpdump.png" alt="TCPDump log showing UDP port 53 unreachable">
+            <figcaption>Figure 1: TCPDump log showing ICMP errors for UDP port 53</figcaption>
+        </div>
+    </div>
+</body>
+</html>
